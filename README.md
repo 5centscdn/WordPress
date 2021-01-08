@@ -4,7 +4,7 @@ website and enjoy greatly improved loading times around the world. Even better, 
 
 ### Installation
 
-1. Upload the plugin folder to the `/wp-content/plugins/` directory
+1. Upload the plugin folder to the `/wp-content/plugins/5centscdn` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 #### How does it work?
