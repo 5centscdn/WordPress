@@ -10,7 +10,7 @@ website and enjoy greatly improved loading times around the world. Even better, 
 #### How does it work?
 The plugin will automatically configure your website to replace existing static content links with the CDN links, greatly speeding up your content.
 
-###Features
+### Features
 * Enter API key get pull zone from API
 * Replace static links with CDN links
 * Automatic HTTPS configuration 
@@ -20,11 +20,11 @@ The plugin will automatically configure your website to replace existing static 
 * Purge cache enabled
 * CDN enable and disable option added
 
-###System Requirements
+### System Requirements
 * PHP >=5.3
 * WordPress >=3.8
 
-####Release Notes
+#### Release Notes
 **20.1 (JANUARY 8TH, 2021)**
  - 5centsCDN BrandKit Update to v3
 
@@ -39,19 +39,19 @@ The plugin will automatically configure your website to replace existing static 
 - Purge cache enabled
 - CDN enable and disable option added
 
-##Screenshots
->5centsCDN Settings Page
+## Screenshots
+> 5centsCDN Settings Page
 [![5centsCDN Settings Page](https://ps.w.org/5centscdn/assets/screenshot-1.png?rev=2243684 "5centsCDN Settings Page")](https://ps.w.org/5centscdn/assets/screenshot-1.png?rev=2243684 "5centsCDN Settings Page")
 
 ------------
 
->Cache Settings Page
+> Cache Settings Page
 [![Cache Settings Page](https://ps.w.org/5centscdn/assets/screenshot-2.png?rev=2243684 "Cache Settings Page")](https://ps.w.org/5centscdn/assets/screenshot-2.png?rev=2243684 "Cache Settings Page")
 
 
 ------------
 
->Clear Cache
+> Clear Cache
 [![Clear Cache](https://ps.w.org/5centscdn/assets/screenshot-3.png?rev=2243684 "Clear Cache")](https://ps.w.org/5centscdn/assets/screenshot-3.png?rev=2243684 "Clear Cache")
 
 
