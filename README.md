@@ -25,6 +25,11 @@ The plugin will automatically configure your website to replace existing static 
 * WordPress >=3.8
 
 #### Release Notes
+**21.1 (JANUARY 29TH, 2021)**
+ - Change button text for saving options to 'Save Settings'
+ - GuzzleClient disable throwing errors on http_errors
+ - added register_uninstall_hook to delete the option set by the module
+
 **20.1 (JANUARY 8TH, 2021)**
  - 5centsCDN BrandKit Update to v3
 

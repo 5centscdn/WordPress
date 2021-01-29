@@ -5,7 +5,9 @@ class FivecentsCDNApi
 {
   public function __construct() 
   {
-	  $this->client = new Client();
+	  $this->client = new Client([
+      'http_errors' => false
+    ]);
 	  $this->api_uri="https://api.5centscdn.com/v1/";
   }
 

@@ -6,7 +6,7 @@ Description: Speed up your website with 5centsCDN Content Delivery Network. This
 Author: 5centsCDN
 Author URI: https://5centscdn.net
 License: GPLv2 or later
-Version: 20.1
+Version: 21.1
 */
 
 /*
@@ -166,4 +166,9 @@ function fivecentscdn_all_zones() {
     } 
   }
   wp_die();
+}
+
+register_uninstall_hook( __FILE__, 'fivecentscdn_uninstall' );
+function fivecentscdn_uninstall() {
+  delete_option('5centscdn');
 }

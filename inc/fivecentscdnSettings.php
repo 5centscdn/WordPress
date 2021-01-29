@@ -279,7 +279,7 @@ class FivecentsCDNSettings
 
             <div>
               <p class="submit" <?php if(!trim($options["api_key"])) { echo 'style="display: none;"'; }?>>
-                  <input type="button" name="fivecentscdn-save-button" id="fivecentscdn-save-button" class="button submit" value="<?php echo (strlen(trim($options['cdn_domain_name'])) == 0 ? 'Enable 5centsCDN' : 'Update CDN Settings'); ?>" onclick="return submitForm()">
+                  <input type="button" name="fivecentscdn-save-button" id="fivecentscdn-save-button" class="button submit" value="<?php echo (strlen(trim($options['cdn_domain_name'])) == 0 ? 'Save Settings' : 'Save Settings'); ?>" onclick="return submitForm()">
                   &nbsp;
                   <input type="button" id="fivecentscdn-clear-cache-button" class="button submit" value="Purge Cache"  onclick="purgecache();">
                   <input type="button"  class="button submit" value="<?php echo ($options['wp_disble_cdn'] == "1" ? "Disable CDN" : "Enable CDN"); ?>"  onclick="disablecdn('<?php echo ($options['wp_disble_cdn'] == "1" ? "0" : "1"); ?>');">
