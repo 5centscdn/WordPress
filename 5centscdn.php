@@ -168,7 +168,8 @@ function fivecentscdn_all_zones() {
   wp_die();
 }
 
-register_uninstall_hook( __FILE__, 'fivecentscdn_uninstall' );
-function fivecentscdn_uninstall() {
+register_uninstall_hook( __FILE__, 'fivecentscdn_deleteoption' );
+register_deactivation_hook( __FILE__, 'fivecentscdn_deleteoption' );
+function fivecentscdn_deleteoption() {
   delete_option('5centscdn');
 }

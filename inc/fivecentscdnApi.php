@@ -8,7 +8,7 @@ class FivecentsCDNApi
 	  $this->client = new Client([
       'http_errors' => false
     ]);
-	  $this->api_uri="https://api.5centscdn.com/v1/";
+	  $this->api_uri="https://api.5centscdn.com/v2/";
   }
 
   public function listPullZones( $api_key )
