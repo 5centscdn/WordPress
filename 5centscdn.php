@@ -6,7 +6,7 @@ Description: Speed up your website with 5centsCDN Content Delivery Network. This
 Author: 5centsCDN
 Author URI: https://5centscdn.net
 License: GPLv2 or later
-Version: 21.6
+Version: 21.6.11
 */
 
 /*

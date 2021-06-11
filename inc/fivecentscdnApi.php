@@ -57,4 +57,3 @@ class FivecentsCDNApi
     return json_decode($res->getBody(), true);
   }
 }
-
