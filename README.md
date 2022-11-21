@@ -25,6 +25,10 @@ The plugin will automatically configure your website to replace existing static 
 * WordPress >=3.8
 
 #### Release Notes
+**22.11.21 (NOVEMBER 21TH, 2022)**
+ - Tested up to: 6.1.1
+ - Stable tag: trunk
+
 **21.6.11 (JUNE 11TH, 2021)**
  - trim trailing white spaces from the php files
 
