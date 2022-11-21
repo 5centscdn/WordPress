@@ -6,7 +6,7 @@ Description: Speed up your website with 5centsCDN Content Delivery Network. This
 Author: 5centsCDN
 Author URI: https://5centscdn.net
 License: GPLv2 or later
-Version: 21.6.11
+Version: 22.11.21
 */
 
 /*
@@ -46,7 +46,7 @@ define('FIVECENTSCDN_DEFAULT_EXCLUDED', ".php");
 
 // Load everything
 spl_autoload_register('fivecentscdn_load_page');
-function fivecentscdn_load_page($class) 
+function fivecentscdn_load_page($class)
 {
   require_once(FIVECENTSCDN_PLUGIN_DIR.'/inc/fivecentscdnSettings.php');
   require_once(FIVECENTSCDN_PLUGIN_DIR.'/inc/fivecentscdnFilter.php');
@@ -55,7 +55,7 @@ function fivecentscdn_load_page($class)
 }
 
 function add_theme_scripts() {
-  wp_enqueue_style( 'mytheme-options-style', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' ); 
+  wp_enqueue_style( 'mytheme-options-style', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' );
 }
 add_action( 'admin_enqueue_scripts', 'add_theme_scripts' );
 
@@ -75,7 +75,7 @@ function only_show_option_if_fivecentscdn_cache_is_active() {
         ]
       ];
       $options = FivecentsCDN::getOptions();
-  
+
       $wp_admin_bar->add_menu($args);
       $wp_admin_bar->add_menu([
       'id' => 'disable-fivecentscdn',
@@ -84,7 +84,7 @@ function only_show_option_if_fivecentscdn_cache_is_active() {
       ]);
     }
     add_action('wp_before_admin_bar_render', 'clear_all_cached_files_fivecentscdncache', 999);
-  } 
+  }
 }
 
 // Register the settings page and menu
@@ -96,7 +96,7 @@ add_action("wp_ajax_fivecentscdn_purge", "fivecentscdn_purge", 0);
 add_action("wp_ajax_fivecentscdn_zone", "five5centscdn_zone", 0);
 add_action("wp_ajax_fivecentscdn_all_zones", "fivecentscdn_all_zones", 0);
 
-function doRewriteFivecentsCDN() 
+function doRewriteFivecentsCDN()
 {
   $options = FivecentsCDN::getOptions();
   if(strlen(trim($options["cdn_domain_name"])) > 0)
@@ -106,7 +106,7 @@ function doRewriteFivecentsCDN()
   }
 }
 
-function fivecentscdn_dnsPrefetch() 
+function fivecentscdn_dnsPrefetch()
 {
   $options = FivecentsCDN::getOptions();
   if(strlen(trim($options["cdn_domain_name"])) > 0)
@@ -122,7 +122,7 @@ function fivecentscdn_purge() {
   if(strlen(trim($options["cdn_domain_name"])) > 0){
     $api->purgePullZone($options["pull_zone"], $options["api_key"]);
     echo "1";
-  } 
+  }
   wp_die();
 
 }
@@ -142,7 +142,7 @@ function five5centscdn_zone() {
       'fqdn' => $zoneArr['zone']['fqdn']
     ];
     echo json_encode($data);
-  } 
+  }
   wp_die();
 }
 
@@ -162,8 +162,8 @@ function fivecentscdn_all_zones() {
       }
       if (count($data) > 0) {
         echo json_encode($data);
-      } 
-    } 
+      }
+    }
   }
   wp_die();
 }
