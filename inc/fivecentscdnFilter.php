@@ -1,4 +1,6 @@
 <?php
+
+
 class FivecentsCDNFilter
 {
   var $baseUrl = null;
@@ -9,33 +11,33 @@ class FivecentsCDNFilter
 
   function __construct($baseUrl, $cdnUrl, $directories, $excludedPhrases, $disableForAdmin) 
   {
-	$this->baseUrl = $baseUrl;
-	$this->cdnUrl = $cdnUrl;
-	$this->disableForAdmin = $disableForAdmin;
-	
-	// Prepare the excludes
-	if(trim($excludedPhrases) != '')
-	{
-		$this->excludedPhrases = explode(',', $excludedPhrases);
-		$this->excludedPhrases = array_map('trim', $this->excludedPhrases);
-	}
-	array_push($this->excludedPhrases, "]");
-	array_push($this->excludedPhrases, "(");
-	
-	// Validate the directories
-	if (trim($directories) == '') 
-	{
-		$directories = FIVECENTSCDN_DEFAULT_DIRECTORIES;
-	}
-	// Create the array
-	$directoryArray = explode(',', $directories);
-	if(count($directoryArray) > 0)
-	{
-		$directoryArray = array_map('trim', $directoryArray);
-		$directoryArray = array_map('quotemeta', $directoryArray);
-		$directoryArray = array_filter($directoryArray);
-	}
-	$this->directories = $directoryArray;
+		$this->baseUrl = $baseUrl;
+		$this->cdnUrl = $cdnUrl;
+		$this->disableForAdmin = $disableForAdmin;
+
+		// Prepare the excludes
+		if(trim($excludedPhrases) != '')
+		{
+			$this->excludedPhrases = explode(',', $excludedPhrases);
+			$this->excludedPhrases = array_map('trim', $this->excludedPhrases);
+		}
+		array_push($this->excludedPhrases, "]");
+		array_push($this->excludedPhrases, "(");
+		
+		// Validate the directories
+		if (trim($directories) == '') 
+		{
+			$directories = FIVECENTSCDN_DEFAULT_DIRECTORIES;
+		}
+		// Create the array
+		$directoryArray = explode(',', $directories);
+		if(count($directoryArray) > 0)
+		{
+			$directoryArray = array_map('trim', $directoryArray);
+			$directoryArray = array_map('quotemeta', $directoryArray);
+			$directoryArray = array_filter($directoryArray);
+		}
+		$this->directories = $directoryArray;
   }
 
   protected function rewriteUrl($asset) 

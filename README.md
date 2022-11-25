@@ -13,7 +13,7 @@ The plugin will automatically configure your website to replace existing static 
 ### Features
 * Enter API key get pull zone from API
 * Replace static links with CDN links
-* Automatic HTTPS configuration 
+* Automatic HTTPS configuration
 * Include or exclude specific directories or phrases
 * Set a custom CDN hostname
 * Show HTTP2 status and HTTP status
