@@ -1,10 +1,10 @@
 === 5centsCDN - WordPress CDN Plugin ===
 Contributors: 5centsCDN
-Tags: cdn, content delivery network, performance, bandwidth
+Tags: CDN, content delivey network, content distribution network, pagespeed, optimization, speed, cache, performance, ddos, seo
 Requires at least: 3.8
-Tested up to: 6.1.1
+Tested up to: 6.2.2
 Stable tag: trunk
-Version: 22.11.21
+Version: 23.6.23
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -43,6 +43,13 @@ The plugin will automatically configure your website to replace existing static 
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 23.6.23 =
+* Plugin Supports WordPress Version 6.2.2
+* Fixed text issues in the description
+* Improved UI/UX
+* Code Improvements
+* Documentation Improvements
 
 = 22.11.21 =
 * Plugin Supports WordPress Version 6.1.1
@@ -86,7 +93,14 @@ The plugin will automatically configure your website to replace existing static 
 
 == Release Notes ==
 
-= 22.11.21 =
+= 23.6.23 (JUNE 23RD, 2023) =
+* Plugin Supports WordPress Version 6.2.2
+* Fixed text issues in the description
+* Improved UI/UX
+* Code Improvements
+* Documentation Improvements
+
+= 22.11.21 (NOVEMBER 21th, 2022) =
 * Plugin Supports WordPress Version 6.1.1
 * Bug Fix: Asset Delivery from HTTP > HTTPS
 * Code Improvements

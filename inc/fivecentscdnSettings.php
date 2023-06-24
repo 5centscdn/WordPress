@@ -2,7 +2,7 @@
 class FivecentsCDN
 {
    public static function getOptions() {
-      $wp_filtered_site_url = get_option('home'); 
+      $wp_filtered_site_url = get_option('home');
       if (isset($_SERVER['HTTPS']) && strpos($wp_filtered_site_url, 'https://') === false) {
          $wp_filtered_site_url = str_replace("http://", "https://", $wp_filtered_site_url);
       }
@@ -26,7 +26,7 @@ class FivecentsCDN
       $options = FivecentsCDN::getOptions();
       return $options[$option];
    }
-   
+
    public static function validateSettings($data) {
       $cdn_domain_name = FivecentsCDN::cleanHostname($data['cdn_domain_name']);
       $pull_zone = $data['pull_zone'];
@@ -43,7 +43,7 @@ class FivecentsCDN
       if ($cdn_domain_name) {
          $cdn_domain_name = $cdn_domain_name.parse_url($siteUrl, PHP_URL_PATH);
       }
- 
+
       return [
          "pull_zone" => $pull_zone,
          "cdn_domain_name" => $cdn_domain_name,
@@ -59,18 +59,18 @@ class FivecentsCDN
          "https" => (bool)($data['https']),
       ];
    }
-   
+
    public static function cleanHostname($hostname) {
       $hostname = str_replace("http://", "", $hostname);
       $hostname = str_replace("https://", "", $hostname);
       return str_replace("/", "", $hostname);
    }
-   
+
    public static function startsWith($haystack, $needle) {
       $length = strlen($needle);
       return (substr($haystack, 0, $length) === $needle);
    }
-   
+
    public static function endsWith($haystack, $needle) {
       $length = strlen($needle);
       if ($length == 0) {
@@ -79,11 +79,11 @@ class FivecentsCDN
       return (substr($haystack, -$length) === $needle);
    }
 }
-   
+
 class FivecentsCDNSettings
 {
    public static function initialize() {
-      $myicon = plugins_url('/menu-icon.png', __FILE__ );  
+      $myicon = plugins_url('/menu-icon.png', __FILE__ );
       add_menu_page(
          "5centsCDN",
          "5centsCDN",
@@ -92,7 +92,7 @@ class FivecentsCDNSettings
          array(
            'FivecentsCDNSettings',
            'outputSettingsPage'
-         ), 
+         ),
          $myicon
       );
       add_filter(
@@ -106,12 +106,12 @@ class FivecentsCDNSettings
       wp_enqueue_script('5centscdn-backend', plugins_url('assets/js/5centscdn-backend.js?v=2.0', dirname(__FILE__)), array('jquery'), '1.1.3', true);
       wp_register_script('5centscdn_lottieanimation', 'https://unpkg.com/@lottiefiles/lottie-player@0.4.0/dist/lottie-player.js');
       wp_enqueue_script('5centscdn_lottieanimation');
-               
+
       wp_register_script('5centscdn_sweetalert', 'https://cdn.jsdelivr.net/npm/sweetalert2@11');
       wp_enqueue_script('5centscdn_sweetalert');
       register_setting('5centscdn', '5centscdn', array("FivecentsCDN", "validateSettings"));
    }
-   
+
    public static function add_action_link($data) {
       // check permission
       if ( ! current_user_can('manage_options') ) {
@@ -135,9 +135,9 @@ class FivecentsCDNSettings
       $info_img=plugins_url( 'assets/info.svg', dirname(__FILE__) );
 
       $clean_img=plugins_url( 'assets/clean.svg', dirname(__FILE__) );
-   
-   
-   
+
+
+
       $options = FivecentsCDN::getOptions();
       $api = new FivecentsCDNApi();
       if ($options['pull_zone']) {
@@ -147,7 +147,7 @@ class FivecentsCDNSettings
          $http = $zone['zone']['ssl']['enabled'];
          $redirect = $zone['zone']['ssl']['redirect'];
          $warning=$zone['warnings'];
-       
+
          if ($zone['zone']['ssl']['warning']==false) {
             $ssl_warning=0;
          } else {
@@ -158,17 +158,17 @@ class FivecentsCDNSettings
          $zone_name = $zone['zone']['name'];
          $zoneArr = $api->listPullZones($options["api_key"]);
       }
-   
+
       $trimed_apikey=trim($options['api_key']);
 
-      
-     
-       ?> 
 
-     <?php 
+
+       ?>
+
+     <?php
 
           $zoneurl = (trim($options["pull_zone"])) ? FIVECENTSCDN_DOMAIN.'dashboard/'.$options['serviceid'].'/zones/http/pull/new' : FIVECENTSCDN_DOMAIN.'clientarea.php';
-     
+
      ?>
 <!-- html section -->
 <div class="container" style="background:#F4F5F7">
@@ -180,7 +180,7 @@ class FivecentsCDNSettings
    <br />
    <!-- tab button -->
 
-   
+
    <ul class="fivecent-nav-tabs ">
       <li class="fivecent-nav-tabs-active " id="tab_1">
          <a onclick="tab_event('tab_1');" class="">CDN Settings</a>
@@ -196,8 +196,8 @@ class FivecentsCDNSettings
       <div class="tab-1-section" style="display:block;" >
          <!--  section -1  -->
          <div class="tab-1-section-1" style="display:<?php if(trim($options['api_key'])){ echo 'none';}else{echo 'block';} ?>">
-         
-       
+
+
             <div class="fivecent-card">
                <p class="fivecent-title">Follow these simple steps to <span class="fivecent-sub-color">Connect Your
                   CDN</span> Account
@@ -248,7 +248,7 @@ class FivecentsCDNSettings
                               details and Enable
                               features such as cache purging. Access your API key on the
                               <a style="color: #59A52C;" target="_blank" href="https://cp.5centscdn.net/clientarea.php">5centsCDN
-                              Control Panel</a> 
+                              Control Panel</a>
                            </p>
                         </div>
                      </div>
@@ -267,7 +267,7 @@ class FivecentsCDNSettings
                      <input type="checkbox" class="custom-control-input" id="cdn_status_change" name="example" <?php if($options['wp_disble_cdn']==1 or $options['asset_acceleration']==1){ echo "checked";}else{ echo "";} if($trimed_apikey){}else{ echo 'disabled';} ?> style="display:none" />
                      <label class="custom-control-label" for="cdn_status_change"></label>
                   </div>
-                  
+
                   <div class="<?php if($options['wp_disble_cdn']==1 or $options['asset_acceleration']==1){ echo "fivecent-chips-active";}else{ echo "fivecent-chips-inactive";}  ?>">
                      <i style="font-size: 8px; width: 16px;" class="fa fa-circle"></i><span><?php if($options['wp_disble_cdn']==1 or $options['asset_acceleration']==1){ echo "Enabled";}else{ echo "Disabled";}  ?></span>
                   </div>
@@ -320,8 +320,8 @@ class FivecentsCDNSettings
                   <label class="form-check-label" for="radio2">Whole Website Acceleration</label>
                </div>
             </div>
-       
-            
+
+
 
             <div class="fivecent-card">
 
@@ -339,7 +339,7 @@ class FivecentsCDNSettings
 
                <div class="warning-message-box cname_added_warning_messages" style="display:none;">
 
-                  
+
                </div>
 
                <div class="ssl-update-error-error warning-message-box">
@@ -353,14 +353,14 @@ class FivecentsCDNSettings
                      </label>
                      <select name="5centscdn[pull_zone]" id="fivecentscdn_pull_zone" class="custom-select">
                         <option value=0 selected>Select pull zone</option>
-                         <?php 
+                         <?php
                            if (trim($options['api_key'])) {
                              if (count($zoneArr['zones'])>0) {
                                foreach ($zoneArr['zones'] as $key => $value) {
                                   if ($value['status'] != "Deleted") {
                          ?>
                          <option value="<?=$value['id']?>"<?php echo ($options["pull_zone"] == $value['id'] ? "selected" : "")?>> <?=$value['name']?></option>
-                         <?php  
+                         <?php
                                    }
                                }
                            }
@@ -370,8 +370,8 @@ class FivecentsCDNSettings
                       <div class="invalid-feedback error_notification_pull_zone"></div>
                   </div>
                   <div class="form-group col-md-6">
-                     <label style="color: #252525;font-weight: 500;">CDN Resource <span class="fivecent-tooltip"> <img style="width: 16px;" src="<?= $info_img  ?>" /> <span style="top: -18px !important;" class="fivecent-tooltiptext">ou have chosen <span id = "txt_cdn_domain_name"><?php echo $cdn_domain_name['0']; ?></span> zone to rewrite your WP URLs to serve via CDN. </span></span></label>
-                       <?php 
+                     <label style="color: #252525;font-weight: 500;">CDN Resource <span class="fivecent-tooltip"> <img style="width: 16px;" src="<?= $info_img  ?>" /> <span style="top: -18px !important;" class="fivecent-tooltiptext">You have chosen<span id = "txt_cdn_domain_name"><?php echo $cdn_domain_name['0']; ?></span> zone to rewrite your WP URLs to serve via CDN. </span></span></label>
+                       <?php
               	          $cdn_domain_nameArr = $options['cdn_domain_name'];
               	          if ($cdn_domain_nameArr) {
                          $cdn_domain_name = explode('/', $cdn_domain_nameArr);
@@ -387,12 +387,12 @@ class FivecentsCDNSettings
                     }?>
                      </select>
                       <div class="invalid-feedback error_notification_cdn_domain_name"></div>
-                   
+
                   </div>
-                 
+
                   <div class=" col-md-6 https_section">
                      <div class="fivecent-form-input-card ">
-                        <span class="fivecent-switch-title" style="font-size: 11px;">HTTPS &nbsp; &nbsp;<i 
+                        <span class="fivecent-switch-title" style="font-size: 11px;">HTTPS &nbsp; &nbsp;<i
                            style="color:<?php echo ($http == "Y" ? " #59A52C" : "red"); ?>;" class="https_status_locker fa fa-lock lock_icon"></i></span>
                         <div class="custom-control custom-switch">
                            <input style="display:none;" type="checkbox" class="custom-control-input" id="https"onClick="return update_zone_ssl('https')" <?php echo ($http == "Y" ? "checked" : ""); ?> />
@@ -403,7 +403,7 @@ class FivecentsCDNSettings
                    <div class=" col-md-6 http2_section">
                      <div class="fivecent-form-input-card ">
                         <span class="fivecent-switch-title" style="font-size: 11px;">HTTP2</span>
-                         <input type="hidden" id="serviceid" class="regular-text code"  name="5centscdn[serviceid]" value="<?php echo $options['serviceid']; ?>" /> 
+                         <input type="hidden" id="serviceid" class="regular-text code"  name="5centscdn[serviceid]" value="<?php echo $options['serviceid']; ?>" />
                         <div class="custom-control custom-switch">
                            <input style="display:none;" type="checkbox" class="custom-control-input" id="http2" onClick="return update_zone_ssl()"  <?php echo ($http2 == "Y" ? "checked" : ""); ?> />
                            <label class="custom-control-label" for="http2"></label>
@@ -420,8 +420,8 @@ class FivecentsCDNSettings
                      </div>
                   </div>
                </div>
-            
-               
+
+
                <div class="row px-md-5  py-md-2" style="margin: 5px;">
                   <div class=" col-md-6">
                      <button type="button" id="purge_tab1" onClick="return purgetab(1)" class="btn btn-primary btn-lg btn-block fivecent-choose-button-active">Purge
@@ -434,7 +434,7 @@ class FivecentsCDNSettings
                </div>
 
                <!-- purge all tab 1 section -->
-              <div class="purge_tab_1_section" style="display:block"> 
+              <div class="purge_tab_1_section" style="display:block">
                <div class="fivecent-gray-card"
                   style="background: #EEF0F2; justify-content: center; font-family: Roboto; font-style: normal; font-weight: normal; font-size: 14px; line-height: 23px;  color: #858585;  align-items: center;  text-align: center; height: auto;">
                   <p style="margin-top: auto !important;">Purging clears the zone or file cache on the edge servers and
@@ -454,7 +454,7 @@ class FivecentsCDNSettings
                <!--end  purge all tab 1 section -->
                <!-- purge particular filr tab 2 section -->
 
-               <div class="purge_tab_2_section" style="display:none"> 
+               <div class="purge_tab_2_section" style="display:none">
                   <div class="row" style="margin: 55px;">
                   <div class="form-group col-md-12">
                      <label style="color: #252525;font-weight: 500;">File List (One file per line</label>
@@ -466,10 +466,10 @@ class FivecentsCDNSettings
                              </div>
                              <div class="invalid-feedback error_notification_web_site_url pusher_field_alert_8909" style="display: none;">Field cannot be empty</div>
                           </div>
-                          
+
 
                      </div>
-                    
+
                   </div>
                </div>
 
@@ -491,7 +491,7 @@ class FivecentsCDNSettings
             <input type="hidden" name="5centscdn[disable_admin]" id="5centscdn_disable_admin" value="<?php echo $options['disable_admin']; ?>" />
 
             <input type="hidden" name="5centscdn[asset_acceleration]" id="asset_acceleration" value="<?php if(isset($options['asset_acceleration'])){ echo $options['asset_acceleration'];}else{ echo 0;} ?>" />
-         
+
              <!-- backup disable cdn -->
                <input type="hidden"  id="wp_disble_cdn_backup" value="<?php echo $options['wp_disble_cdn']; ?>" />
              <!-- end -->
@@ -509,7 +509,7 @@ class FivecentsCDNSettings
       <!-- tab-2 -->
       <div class="tab-2-section" style="display:none;">
 
-     
+
          <div class="fivecent-card">
               <div class="fivecent-gray-card">
                   <span class="fivecent-switch-title">CDN</span>
@@ -520,7 +520,7 @@ class FivecentsCDNSettings
                   <div class="<?php if($options['wp_disble_cdn']==1 or $options['asset_acceleration']==1){ echo "fivecent-chips-active";}else{ echo "fivecent-chips-inactive";}  ?>">
                      <i style="font-size: 8px; width: 16px;" class="fa fa-circle"></i><span><?php if($options['wp_disble_cdn']==1 or $options['asset_acceleration']==1){ echo "Enabled";}else{ echo "Disabled";}  ?></span>
                   </div>
-               </div>  
+               </div>
 
                <div class="row" style="margin: 55px;">
                   <div class="form-group col-md-6">
@@ -533,10 +533,10 @@ class FivecentsCDNSettings
                         <div>
                            <p style="color:#8D8D8D; font-size: 13px;">The links containing the listed phrases will be excluded from the CDN.
                              Enter a <code style="background: #59A52C; color: #ffffff; border-radius: 3px;" >,</code> separated list without spaces.</p>
-                           
-                              
+
+
                         </div>
-                        
+
                      </div>
                      <div style="height: 39px;background: #EFF1F4; border-radius: 8px;margin-top: -25px;text-align: center; justify-content: center; align-items: center; display: flex; padding-top: 18px;">
 
@@ -546,7 +546,7 @@ class FivecentsCDNSettings
                   <div class="form-group col-md-6">
                      <label style="color: #252525;font-weight: 500;" for="inputPassword4">Included Directories</label>
                      <input type="text" class="form-control fivecentscdn_api_key_initial" name="5centscdn[directories]" id="fivecentscdn_directories" value="<?php echo $options['directories']; ?>" placeholder="Enter Included Directories">
-                 
+
                      <div class="fivecent-info-card">
                         <span class="fivecent-icon-round">
                         <i style="font-size: 8px; color: #59A52C; width: 16px;" class="fa fa-info"></i>
@@ -566,7 +566,7 @@ class FivecentsCDNSettings
 
 
           </div>
-       
+
       </div>
       <!-- end tab-2 -->
         <!-- connect button -->
@@ -588,11 +588,11 @@ class FivecentsCDNSettings
       <!-- end save settings button -->
 
       <div id="fivecentscdn_popupBackground" style="display: none;justify-content: center; align-items: center; flex-direction: column; z-index: 10; position: fixed; top: 0px; left: 0px; height: 100vh; width: 100%; background-color: #ffffff9e">
-   
+
             <div id="fivecentscdn_popupBox" style="display:flex; z-index: 15; position: fixed; top: 0px;  height: 100%; width: 100%; justify-content: center; align-items: center; flex-direction: column;">
                 <lottie-player
                    autoplay
-                 
+
                    loop
                    mode="normal"
                    src="<?php echo plugins_url('purge_animation.json', __FILE__ ); ?>"
@@ -601,11 +601,11 @@ class FivecentsCDNSettings
                </lottie-player>
             </div>
        </div>
-           
-    
+
+
    </form>
 
-   
+
 </div>
 </div>
 
@@ -628,15 +628,15 @@ if($options['pull_zone']){
         jQuery('.https_redirect_section').css('pointer-event', 'none');
         jQuery('.https_redirect_section').css('opacity', 0.4);
         jQuery("#redirect").prop('disabled', true);
-     
+
    </script>
-  
+
   <?php
   }
 }
 ?>
 
-<?php 
+<?php
   if(isset($_GET['wp_disble_cdn']) && $_GET['wp_disble_cdn']==0){
 
    ?>
@@ -652,7 +652,7 @@ if($options['pull_zone']){
 
   <?php if(isset($_GET['wp_disble_cdn']) && $_GET['wp_disble_cdn']!= $options['wp_disble_cdn']){ ?>
         <script>
-                   
+
                 /* url filter after redirect */
 
             var url = window.location.href;
@@ -665,12 +665,12 @@ if($options['pull_zone']){
 
             if(header_cdn_status==0){
                alert(1)
-                
+
             } */
             jQuery('#wp_disble_cdn').val('<?php echo sanitize_text_field($_GET['wp_disble_cdn']);?>');
-                  
-            jQuery('#fivecentscdn_options_form').submit();  
-      </script>  
+
+            jQuery('#fivecentscdn_options_form').submit();
+      </script>
       <?php
       }
    }

@@ -25,6 +25,15 @@ The plugin will automatically configure your website to replace existing static 
 * WordPress >=3.8
 
 #### Release Notes
+**23.6.23 (JUNE 23RD, 2023)**
+ - Tested up to: 6.2.2
+ - Plugin Supports WordPress Version 6.2.2
+ - Fixed text issues in the description
+ - Improved UI/UX
+ - Code Improvements
+ - Documentation Improvements
+ - Stable tag: trunk
+
 **22.11.21 (NOVEMBER 21TH, 2022)**
  - Tested up to: 6.1.1
  - Stable tag: trunk
