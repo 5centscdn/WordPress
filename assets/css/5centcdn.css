@@ -554,3 +554,138 @@ button:focus {
     left: 0px;
   }
 }
+
+
+/* promotional banner */
+.fivecentscdn.notice{
+     position: relative;
+     display:flex;
+     border-left:2px solid #59a52c;
+     justidy-content:space-between;
+     padding:20px ;
+}
+.fivecentscdn.notice img{
+     width:75%
+}
+.fivecentscdn .w-20{
+     min-width:15%;
+}
+.fivecentscdn .w-80{
+     min-width:80%;
+}
+.fivecentscdn .notice-message{
+     font-size:20px;
+     line-height:1.2rem;
+}
+
+
+.fivecentscdn .notice-message {
+     font-size: 14px !important;
+     line-height: 24px;
+}
+ @media only screen and (max-width:1000px){
+     .fivecentscdn.notice img{
+         width:50%!important;
+    }
+    .fivecentscdn .notice-message {
+         font-size: 18px !important;
+         line-height: 24px;
+    }
+    .fivecentscdn .w-20{
+         min-width:100%;
+    }
+    .fivecentscdn .w-80{
+         min-width:100%;
+    }
+    .fivecentscdn.notice{
+         display:flex;
+         flex-wrap:wrap;
+         justify-content:center;
+         text-align:center;
+         gap:20px;
+    }
+    .fivecentscdn .notice-right-container {
+         display:flex;
+         justify-content:center;
+         text-align:center;
+         margin:auto;
+    }
+    .fivecentscdn .notice-logo{
+         width:auto;
+         display:flex;
+         justify-content:center;
+         text-align:center;
+         align-items:center;
+         margin:auto;
+    }
+    .fivecentscdn .button-container{
+         display: flex;
+         flex-wrap: wrap;
+         gap: 20px;
+         justify-content: center!important;
+         margin:20px;
+    }
+}
+.fivecentscdn .notice-right-container{
+     display:flex;
+     align-items:center;
+     justify-content:center;
+}
+.fivecentscdn .notice-right-container{
+     margin:auto!important;
+}
+
+
+.fivecentscdn .review-btn {
+    background: #59a52c;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    white-space: pre;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.fivecentscdn .linked-btn{
+     background: #007bb5;
+     color: white;
+     padding:10px 20px;
+     text-decoration:none;
+     white-space:pre;
+     font-size:14px;
+     font-weight:500;
+     border-radius:4px;
+}
+.fivecentscdn .twitter-btn{
+     background: #55ACEE;
+     color: white;
+     padding:10px 20px;
+     text-decoration:none;
+     white-space:pre;
+     font-size:14px;
+     font-weight:500;
+     border-radius:4px;
+}
+.fivecentscdn .g2-btn{
+     background: #ff492c;
+     color: white;
+     padding:10px 20px;
+     text-decoration:none;
+     white-space:pre;
+     font-size:14px;
+     font-weight:500;
+     border-radius:4px;
+}
+.fivecentscdn .button-container{
+     display: flex;
+     flex-wrap: wrap;
+     gap: 20px;
+     justify-content: left;
+     margin:20px 20px 20px 0;
+}
+
+.fivecentscdn .button-container a:hover{
+  color: #fff;
+  text-decoration: none;
+}

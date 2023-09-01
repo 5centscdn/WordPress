@@ -25,6 +25,12 @@ The plugin will automatically configure your website to replace existing static 
 * WordPress >=3.8
 
 #### Release Notes
+**23.9.1 (SEPTEMBER 1ST, 2023)**
+ - Tested up to: 6.3.1
+ - Plugin Supports WordPress Version 6.3.1
+ - Fixed Bugs that prevented Asset Acceleration to connect to CDN for some users
+ - Code Improvements
+
 **23.6.23 (JUNE 23RD, 2023)**
  - Tested up to: 6.2.2
  - Plugin Supports WordPress Version 6.2.2

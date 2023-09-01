@@ -501,8 +501,9 @@ class FivecentsCDNSettings
              <!-- end -->
 
              <!-- ssl warning holder -->
-
+             <div style="display:none">
                <input type="hidden" id="temp_ssl_warning_holder" value="<?php if(isset($ssl_warning)){echo $ssl_warning;}else{ echo 0;} ?>" />
+             </div>
              <!-- end -->
       </div>
       <!-- end tab-1 -->

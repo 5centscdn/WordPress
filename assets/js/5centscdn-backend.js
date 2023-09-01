@@ -750,7 +750,7 @@ function setzone() {
 
 
 
-    
+
 }); */
 
 jQuery(".class_fivecentscdn_api_key").on("change paste keyup", function () {
@@ -1084,6 +1084,15 @@ jQuery("#fivecentscdn_pull_zone").change(function (event) {
       }
     });
   }
+});
+
+jQuery("#fivecentscdn-promotional-banner-close-button").click(function (e) {
+  jQuery('#fivecentscdn-promotional-banner').fadeOut(300, () => {
+    jQuery(this).remove();
+  });
+ const expirationDate = new Date();
+ expirationDate.setDate(expirationDate.getDate() + 15);
+ document.cookie = 'fivecentscdn_banner_closed='+ encodeURIComponent(1) + '; expires=' + expirationDate.toUTCString() + '; path=/';
 });
 
 (function () {

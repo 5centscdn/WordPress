@@ -2,9 +2,9 @@
 Contributors: 5centsCDN
 Tags: CDN, content delivey network, content distribution network, pagespeed, optimization, speed, cache, performance, ddos, seo
 Requires at least: 3.8
-Tested up to: 6.2.2
+Tested up to: 6.3.1
 Stable tag: trunk
-Version: 23.6.23
+Version: 23.9.1
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -43,6 +43,12 @@ The plugin will automatically configure your website to replace existing static 
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 23.9.1 =
+* Plugin Supports WordPress Version 6.3.1
+* Fixed Bugs that prevented Asset Acceleration to connect to CDN for some users
+* Code Improvements
+
 
 = 23.6.23 =
 * Plugin Supports WordPress Version 6.2.2
@@ -92,6 +98,11 @@ The plugin will automatically configure your website to replace existing static 
 6. Cache Purging: Purge All / Selected files / Post / Page
 
 == Release Notes ==
+
+= 23.9.1 (SEPTEMBER 1ST, 2023) =
+* Plugin Supports WordPress Version 6.3.1
+* Fixed Bugs that prevented Asset Acceleration to connect to CDN for some users
+* Code Improvements
 
 = 23.6.23 (JUNE 23RD, 2023) =
 * Plugin Supports WordPress Version 6.2.2
