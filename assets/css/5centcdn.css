@@ -146,9 +146,10 @@ body {
 .fivecent-sub-title {
   font-size: 18px;
   padding-left: 50px;
-  align-self: end;
+  align-self: center;
   color: #FFFFFF;
   font-weight: 600;
+  margin: 0;
 }
 
 input {
@@ -560,9 +561,11 @@ button:focus {
 .fivecentscdn.notice{
      position: relative;
      display:flex;
-     border-left:2px solid #59a52c;
-     justidy-content:space-between;
+     border-left:10px solid #59a52c;
+     border-radius: 8px;
      padding:20px ;
+     background: #171717;
+     color: #fff;
 }
 .fivecentscdn.notice img{
      width:75%
@@ -586,6 +589,7 @@ button:focus {
  @media only screen and (max-width:1000px){
      .fivecentscdn.notice img{
          width:50%!important;
+         margin-top: 10px;
     }
     .fivecentscdn .notice-message {
          font-size: 18px !important;
@@ -623,7 +627,7 @@ button:focus {
          flex-wrap: wrap;
          gap: 20px;
          justify-content: center!important;
-         margin:20px;
+         margin: 20px 0 11px 0;
     }
 }
 .fivecentscdn .notice-right-container{
@@ -648,7 +652,7 @@ button:focus {
 }
 
 .fivecentscdn .linked-btn{
-     background: #007bb5;
+     background: #2E76B3;
      color: white;
      padding:10px 20px;
      text-decoration:none;
@@ -658,7 +662,7 @@ button:focus {
      border-radius:4px;
 }
 .fivecentscdn .twitter-btn{
-     background: #55ACEE;
+     background: #000000;
      color: white;
      padding:10px 20px;
      text-decoration:none;
@@ -666,9 +670,10 @@ button:focus {
      font-size:14px;
      font-weight:500;
      border-radius:4px;
+     border: 1px solid #ffffff96;
 }
 .fivecentscdn .g2-btn{
-     background: #ff492c;
+     background: #FF492C;
      color: white;
      padding:10px 20px;
      text-decoration:none;
@@ -682,7 +687,7 @@ button:focus {
      flex-wrap: wrap;
      gap: 20px;
      justify-content: left;
-     margin:20px 20px 20px 0;
+     margin: 20px 0 11px 0;
 }
 
 .fivecentscdn .button-container a:hover{

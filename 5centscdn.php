@@ -6,7 +6,7 @@ Description: Speed up your website with 5centsCDN Content Delivery Network. This
 Author: 5centsCDN
 Author URI: https://5centscdn.net
 License: GPLv2 or later
-Version: 23.9.1
+Version: 23.11.20
 */
 
 /*
@@ -327,7 +327,7 @@ function fivecentscdn_all_zones() {
 
 function fivecentscdn_promotional_banner() {
     if (!isset($_COOKIE['fivecentscdn_banner_closed'])) {
-        $banner_image_url =  plugins_url('assets/5centscdn.svg', __FILE__ );
+        $banner_image_url =  plugins_url('assets/5centscdn.png', __FILE__ );
   		echo
   			'<div id="fivecentscdn-promotional-banner" class="fivecentscdn notice notice-info">
           <span class="notice-dismiss" id="fivecentscdn-promotional-banner-close-button"></span>
@@ -338,11 +338,11 @@ function fivecentscdn_promotional_banner() {
           </div>
           <div class=" w-80">
             <div class="notice-message">
-               Hey! You have been using 5centsCDN Plugin for a few days and we hope 5centsCDN is able to help
-               you speed up your Assets & Website Delivery. If you like our plugin would you please show some
-               love by doing actions like:
+            	<p>
+                Hey! You have been using 5centsCDN Plugin for a few days and we hope 5centsCDN is able to help you speed up your Assets & Website Delivery. If you like our plugin would you please show some love by  doing actions like :
+              </p>
                <div class="button-container notice-vert-space">
-                 <a id="5centscdn" target="_blank" href="https://wordpress.org/support/plugin/5centscdn/reviews/" class="review-btn">Rate it 5 Stars</a>
+                 <a id="5centscdn" target="_blank" href="https://wordpress.org/support/plugin/5centscdn/reviews/" class="review-btn">Rate us</a>
                  <a id="5centscdn_btn_already_did" target="_blank" href="https://www.linkedin.com/company/5centscdn" class="wpmet-notice-button linked-btn">Follow us on LinkedIn</a>
                  <a id="#" target="_blank" href="https://twitter.com/5centscdn" class="wpmet-notice-button twitter-btn"> Tweet about 5centsCDN</a>
                  <a id="elementskit-lite_btn_not_good" target="_blank" href="https://www.g2.com/products/5centscdn/reviews#reviews" class="g2-btn button-default">Share a Review on G2</a>
