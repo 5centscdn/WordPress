@@ -2,15 +2,15 @@
 /*
 Plugin Name: 5centsCDN
 Text Domain: 5centscdn
-Description: Speed up your website with 5centsCDN Content Delivery Network. This plugin allows you to easily enable 5centsCDN on your WordPress website and enjoy greatly improved loading times around the world. Even better, it takes just a minute to set up. To Enable CDN web acceleration on your WordPress website using 5centsCDN Content Delivery Network. Simply enable the plugin and select the pull zone created on the CDN control panel. Enjoy world-class acceleration with 5centsCDN powered by Akamai (Enterprise plan)!
+Description: Speed up your website with 5centsCDN Content Delivery Network. This plugin allows you to easily enable 5centsCDN on your WordPress website and enjoy greatly improved loading times around the world. Even better, it takes just a minute to set up. To Enable CDN web acceleration on your WordPress website using 5centsCDN Content Delivery Network. Simply enable the plugin and select the pull zone created on the CDN control panel. Enjoy world-class acceleration with 5centsCDN!
 Author: 5centsCDN
 Author URI: https://5centscdn.net
 License: GPLv2 or later
-Version: 23.11.20
+Version: 25.4.15
 */
 
 /*
-Copyright (C)  2020 5centsCDN
+Copyright (C)  2024 5centsCDN
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -211,20 +211,13 @@ function fivecentscdn_do_rewrite() {
   if (strlen(trim($options["cdn_domain_name"])) > 0) {
     $modified_site_url = $options["site_url"];
 
-    if($options["wp_disble_cdn"]){
-      $https_status = 'https://';
-    }else{
-     $https_status = $options['https'] ? 'https://' : 'http://';
-    }
-
-
     if (!str_contains($options["site_url"], 'https') && isset($_SERVER['HTTPS'])) {
       $modified_site_url = str_replace("http", "https", $modified_site_url);
     }
 
     $rewriter = new FivecentsCDNFilter(
       $modified_site_url,
-      ($https_status) . $options["cdn_domain_name"],
+      "https://" . $options["cdn_domain_name"],
       $options["directories"],
       $options["excluded"],
       $options["disable_admin"]

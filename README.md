@@ -1,6 +1,5 @@
 ## 5centsCDN - WordPress CDN Plugin
-**Speed up your website with 5centsCDN** Content Delivery Network. This plugin allows you to easily **enable 5centsCDN on your WordPress**
-website and enjoy greatly improved loading times around the world. Even better, it takes just a minute to set up. To Enable CDN web acceleration on your WordPress website using 5centsCDN Content Delivery Network. Simply enable the plugin and select the pull zone created on the CDN control panel. Enjoy world-class acceleration with 5centsCDN powered by Akamai (Enterprise plan)!
+Optimize WordPress speed and performance with 5centsCDN plugin. Get advanced caching, CDN, and seamless optimization today!
 
 ### Installation
 
@@ -25,6 +24,18 @@ The plugin will automatically configure your website to replace existing static 
 * WordPress >=3.8
 
 #### Release Notes
+**25.4.15 (APRIL 15TH, 2025)**
+ - Plugin Supports WordPress Version 6.8
+
+**24.8.16 (AUGUST 16TH, 2024)**
+ - Plugin Supports WordPress Version 6.6.1
+ - FAQs Added
+
+**24.8.12 (AUGUST 12TH, 2024)**
+ - Plugin Supports WordPress Version 6.6.1
+ - Code Improvements 
+ - Improved Whole Website Acceleration 
+
 **23.11.20 (NOVEMBER 20TH, 2023)**
  - Plugin Supports WordPress Version 6.4.1
  - Code Improvements 

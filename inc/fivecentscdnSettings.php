@@ -36,10 +36,6 @@ class FivecentsCDN
          $siteUrl = substr($siteUrl, 0, -1);
       }
 
-      if ($data['wp_disble_cdn'] == "0") {
-         $siteUrl = "";
-      }
-
       if ($cdn_domain_name) {
          $cdn_domain_name = $cdn_domain_name.parse_url($siteUrl, PHP_URL_PATH);
       }

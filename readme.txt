@@ -1,20 +1,19 @@
 === 5centsCDN - WordPress CDN Plugin ===
 Contributors: 5centsCDN
-Tags: CDN, content delivey network, content distribution network, pagespeed, optimization, speed, cache, performance, ddos, seo
+Tags: optimize, cdn, content delivery network, performance, caching
 Requires at least: 3.8
-Tested up to: 6.4.1
+Tested up to: 6.8
 Stable tag: trunk
-Version: 23.11.20
+Version: 25.4.15
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-**Speed up your website with 5centsCDN** Content Delivery Network. This plugin allows you to easily enable 5centsCDN on your WordPress website and enjoy greatly improved loading times around the world. Even better, it takes just a minute to set up. To Enable CDN web acceleration on your WordPress website using 5centsCDN Content Delivery Network. Simply enable the plugin and select the pull zone created on the CDN control panel. Enjoy world-class acceleration with 5centsCDN powered by Akamai (Enterprise plan)!
+Optimize WordPress speed and performance with 5centsCDN plugin. Get advanced caching, CDN, and seamless optimization today!
 
 == Description ==
 
-**Speed up your website with 5centsCDN** Content Delivery Network. This plugin allows you to easily **enable 5centsCDN on your WordPress**
-website and enjoy greatly improved loading times around the world. Even better, it takes just a minute to set up. To Enable CDN web acceleration on your WordPress website using 5centsCDN Content Delivery Network. Simply enable the plugin and select the pull zone created on the CDN control panel. Enjoy world-class acceleration with 5centsCDN powered by Akamai (Enterprise plan)!
+Optimize WordPress speed and performance with 5centsCDN plugin. Get advanced caching, CDN, and seamless optimization today!
 
 == Installation ==
 
@@ -40,9 +39,33 @@ The plugin will automatically configure your website to replace existing static 
 = Author =
 * [5centsCDN](https://5centscdn.net "5centsCDN")
 
-== Frequently Asked Questions ==
+== FAQ ==
+
+= Q: How can I obtain the API key for 5centsCDN? =
+A: To get your API key, follow these steps:
+1. Log into your 5centsCDN Dashboard.
+2. Navigate to the sidebar and select Account > API.
+3. Click the + button to generate a new API key.
+4. Assign all the necessary permissions and save it.
+
+Once you have your API key, go back to your WordPress site, paste the API key, and click “Connect” to complete the setup.
+
+= Q: What is the difference between Asset Acceleration and Whole Site Acceleration? =
+A: Asset Acceleration delivers specific content types like images (JPEG, PNG, AVIF), documents (PDF), and similar files using the CDN. Whole Site Acceleration, on the other hand, delivers the entire website including HTML, CSS, JS, fonts, and more. For optimal performance, we recommend using Whole Site Acceleration.
 
 == Changelog ==
+
+= 25.4.15 =
+* Plugin Supports WordPress Version 6.8
+
+= 24.8.16 =
+* Plugin Supports WordPress Version 6.6.1
+* FAQs Added 
+
+= 24.8.12 =
+* Plugin Supports WordPress Version 6.6.1
+* Code Improvements 
+* Improved Whole Website Acceleration 
 
 = 23.11.20 =
 * Plugin Supports WordPress Version 6.4.1
@@ -107,9 +130,21 @@ The plugin will automatically configure your website to replace existing static 
 
 == Release Notes ==
 
+= 25.4.15 (APRIL 15TH, 2025) =
+* Plugin Supports WordPress Version 6.8
+
+= 24.8.16 (AUGUST 16TH, 2024) =
+* Plugin Supports WordPress Version 6.6.1
+* FAQs Added
+
+= 24.8.12 (AUGUST 12TH, 2024) =
+* Plugin Supports WordPress Version 6.6.1
+* Code Improvements 
+* Improved Whole Website Acceleration 
+
 = 23.11.20 (NOVEMBER 20TH, 2023) =
- * Plugin Supports WordPress Version 6.4.1
- * Code Improvements 
+* Plugin Supports WordPress Version 6.4.1
+* Code Improvements 
 
 = 23.10.9 (OCTOBER 9TH, 2023) =
 * Plugin Supports WordPress Version 6.3.1
