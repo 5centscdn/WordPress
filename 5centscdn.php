@@ -6,11 +6,11 @@ Description: Speed up your website with 5centsCDN Content Delivery Network. This
 Author: 5centsCDN
 Author URI: https://5centscdn.net
 License: GPLv2 or later
-Version: 25.4.15
+Version: 26.06.09
 */
 
 /*
-Copyright (C)  2024 5centsCDN
+Copyright (C)  2026 5centsCDN
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ define('FIVECENTSCDN_PLUGIN_BASE', plugin_basename(__FILE__));
 if (!defined('FIVECENTSCDN_PULLZONEDOMAIN'))
 define('FIVECENTSCDN_PULLZONEDOMAIN', "5centscdn.net");
 if (!defined('FIVECENTSCDN_DOMAIN'))
-define('FIVECENTSCDN_DOMAIN', "https://cp.5centscdn.net/");
+define('FIVECENTSCDN_DOMAIN', "https://www.5centscdn.net/dashboard");
 if (!defined('FIVECENTSCDN_DEFAULT_DIRECTORIES'))
 define('FIVECENTSCDN_DEFAULT_DIRECTORIES', "wp-content,wp-includes");
 if (!defined('FIVECENTSCDN_DEFAULT_EXCLUDED'))
@@ -46,7 +46,7 @@ define('FIVECENTSCDN_DEFAULT_EXCLUDED', ".php");
 
 // Load everything
 spl_autoload_register('fivecentscdn_load_page');
-function fivecentscdn_load_page($class) {
+function fivecentscdn_load_page(mixed $class) {
   require_once(FIVECENTSCDN_PLUGIN_DIR.'/inc/fivecentscdnSettings.php');
   require_once(FIVECENTSCDN_PLUGIN_DIR.'/inc/fivecentscdnFilter.php');
   require_once(FIVECENTSCDN_PLUGIN_DIR.'/vendor/autoload.php');
@@ -55,9 +55,8 @@ function fivecentscdn_load_page($class) {
 
 // Register the settings page and menu
 add_action('admin_enqueue_scripts', 'fivecentscdn_add_theme_scripts' );
-add_action('admin_bar_menu', 'fivecentscdn_add_toolbar_items', 100);
 add_action('admin_menu', array("FivecentsCDNSettings", "initialize"));
-add_action('admin_init', 'only_show_option_if_fivecentscdn_cache_is_active');
+add_action('admin_bar_menu', 'fivecentscdn_add_toolbar_items', 100);
 
 add_action('wp_head', "fivecentscdn_dnsPrefetch", 0);
 add_action('wp_ajax_fivecentscdn_purge', "fivecentscdn_purge", 0);
@@ -94,29 +93,6 @@ function fivecentscdn_wpdocs_post_submitbox_misc_actions( $post ) {
   ";
 }
 
-function only_show_option_if_fivecentscdn_cache_is_active() {
-  if (is_plugin_active('5centscdn/5centscdn.php')) {
-    function clear_all_cached_files_fivecentscdncache() {
-      global $wp_admin_bar;
-
-      $options = FivecentsCDN::getOptions();
-      if ($options['wp_disble_cdn'] == '1' || $options['asset_acceleration'] == '1') {
-        $head_cdn_status_text="Disable CDN";
-        $cdn_switch_status=0;
-      } else {
-        $head_cdn_status_text="Enable CDN";
-        $cdn_switch_status=1;
-      }
-
-      $wp_admin_bar->add_menu([
-        'id' => 'disable-fivecentscdn',
-        'title' => __(($head_cdn_status_text)),
-        'href' => wp_nonce_url(admin_url('admin.php?page=5centscdn&wp_disble_cdn='.$cdn_switch_status))
-      ]);
-    }
-  }
-}
-
 function fivecentscdn_add_toolbar_items($admin_bar) {
   $current_page = admin_url(sprintf('admin.php?%s', http_build_query($_GET)));
 
@@ -142,6 +118,15 @@ function fivecentscdn_add_toolbar_items($admin_bar) {
     ));
   }
 
+  $options = FivecentsCDN::getOptions();
+  if ($options['wp_disble_cdn'] == '1' || $options['asset_acceleration'] == '1') {
+    $head_cdn_status_text="Disable CDN";
+    $cdn_switch_status=0;
+  } else {
+    $head_cdn_status_text="Enable CDN";
+    $cdn_switch_status=1;
+  }
+
   $admin_bar->add_menu( array(
     'id'    => 'fivecentscdn',
     'title' => '5centscdn',
@@ -150,6 +135,7 @@ function fivecentscdn_add_toolbar_items($admin_bar) {
       'title' => __('My Item'),
     ),
   ));
+
   $admin_bar->add_menu( array(
     'id'    => 'fivecentscdn-sub-item-setting',
     'parent' => 'fivecentscdn',
@@ -161,6 +147,14 @@ function fivecentscdn_add_toolbar_items($admin_bar) {
       'class' => 'wp_rocket_item'
     ),
   ));
+
+  $admin_bar->add_menu([
+    'id' => 'disable-fivecentscdn',
+    'parent' => 'fivecentscdn',
+    'title' => $head_cdn_status_text,
+    'href' => wp_nonce_url(admin_url('admin.php?page=5centscdn&wp_disble_cdn='.$cdn_switch_status))
+  ]);    
+
   $admin_bar->add_menu( array(
     'id'    => 'fivecentscdn-sub-item-purge-all',
     'parent' => 'fivecentscdn',
@@ -208,22 +202,26 @@ function fivecentscdn_cname_update() {
 
 function fivecentscdn_do_rewrite() {
   $options = FivecentsCDN::getOptions();
-  if (strlen(trim($options["cdn_domain_name"])) > 0) {
-    $modified_site_url = $options["site_url"];
 
-    if (!str_contains($options["site_url"], 'https') && isset($_SERVER['HTTPS'])) {
-      $modified_site_url = str_replace("http", "https", $modified_site_url);
+  if ($options['wp_disble_cdn'] == 1 || $options['asset_acceleration'] == 1) {
+    if (strlen(trim($options["cdn_domain_name"])) > 0) {
+      $modified_site_url = $options["site_url"];
+
+      if (!str_contains($options["site_url"], 'https') && isset($_SERVER['HTTPS'])) {
+        $modified_site_url = str_replace("http://", "https://", $modified_site_url);
+      }
+
+      $rewriter = new FivecentsCDNFilter(
+        $modified_site_url,
+        "https://" . $options["cdn_domain_name"],
+        $options["directories"],
+        $options["excluded"],
+        $options["disable_admin"]
+      );
+      $rewriter->startRewrite();
     }
-
-    $rewriter = new FivecentsCDNFilter(
-      $modified_site_url,
-      "https://" . $options["cdn_domain_name"],
-      $options["directories"],
-      $options["excluded"],
-      $options["disable_admin"]
-    );
-    $rewriter->startRewrite();
   }
+
 }
 
 function fivecentscdn_update_zone_ssl() {
@@ -300,6 +298,7 @@ function fivecentscdn_all_zones() {
     $api = new FivecentsCDNApi();
     $zoneArr = $api->listPullZones(sanitize_text_field($_POST['apikey']));
     if (count($zoneArr['zones']) > 0) {
+      $data = [];
       foreach ($zoneArr['zones'] as $key => $value) {
         if ($value['status'] != "Deleted" && $value['optimize'] == 'http') {
           $data[] = [
@@ -319,31 +318,31 @@ function fivecentscdn_all_zones() {
 }
 
 function fivecentscdn_promotional_banner() {
-    if (!isset($_COOKIE['fivecentscdn_banner_closed'])) {
-        $banner_image_url =  plugins_url('assets/5centscdn.png', __FILE__ );
-  		echo
-  			'<div id="fivecentscdn-promotional-banner" class="fivecentscdn notice notice-info">
-          <span class="notice-dismiss" id="fivecentscdn-promotional-banner-close-button"></span>
-          <div class="notice-right-container w-20 ">
-            <a target="_blank" href="https://5centscdn.net">
-            <img class="notice-logo" src="' . esc_url($banner_image_url) . '" alt="5centscdn logo">
-            </a>
+  if (!isset($_COOKIE['fivecentscdn_banner_closed'])) {
+    $banner_image_url =  plugins_url('assets/5centscdn.png', __FILE__ );
+    echo
+      '<div id="fivecentscdn-promotional-banner" class="fivecentscdn notice notice-info">
+        <span class="notice-dismiss" id="fivecentscdn-promotional-banner-close-button"></span>
+        <div class="notice-right-container w-20 ">
+          <a target="_blank" href="https://5centscdn.net">
+          <img class="notice-logo" src="' . esc_url($banner_image_url) . '" alt="5centscdn logo">
+          </a>
+        </div>
+        <div class=" w-80">
+          <div class="notice-message">
+            <p>
+              Hey! You have been using 5centsCDN Plugin for a few days and we hope 5centsCDN is able to help you speed up your Assets & Website Delivery. If you like our plugin would you please show some love by  doing actions like :
+            </p>
+              <div class="button-container notice-vert-space">
+                <a id="5centscdn" target="_blank" href="https://wordpress.org/support/plugin/5centscdn/reviews/" class="review-btn">Rate us</a>
+                <a id="5centscdn_btn_already_did" target="_blank" href="https://www.linkedin.com/company/5centscdn" class="wpmet-notice-button linked-btn">Follow us on LinkedIn</a>
+                <a id="#" target="_blank" href="https://x.com/5centscdn" class="wpmet-notice-button twitter-btn"> Share on X</a>
+                <a id="elementskit-lite_btn_not_good" target="_blank" href="https://www.g2.com/products/5centscdn/reviews#reviews" class="g2-btn button-default">Share a Review on G2</a>
+              </div>
+              <div style="clear:both"></div>
           </div>
-          <div class=" w-80">
-            <div class="notice-message">
-            	<p>
-                Hey! You have been using 5centsCDN Plugin for a few days and we hope 5centsCDN is able to help you speed up your Assets & Website Delivery. If you like our plugin would you please show some love by  doing actions like :
-              </p>
-               <div class="button-container notice-vert-space">
-                 <a id="5centscdn" target="_blank" href="https://wordpress.org/support/plugin/5centscdn/reviews/" class="review-btn">Rate us</a>
-                 <a id="5centscdn_btn_already_did" target="_blank" href="https://www.linkedin.com/company/5centscdn" class="wpmet-notice-button linked-btn">Follow us on LinkedIn</a>
-                 <a id="#" target="_blank" href="https://twitter.com/5centscdn" class="wpmet-notice-button twitter-btn"> Tweet about 5centsCDN</a>
-                 <a id="elementskit-lite_btn_not_good" target="_blank" href="https://www.g2.com/products/5centscdn/reviews#reviews" class="g2-btn button-default">Share a Review on G2</a>
-               </div>
-               <div style="clear:both"></div>
-            </div>
-          </div>
-        </div>';
+        </div>
+      </div>';
     }
 }
 

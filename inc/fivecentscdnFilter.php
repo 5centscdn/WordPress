@@ -3,11 +3,11 @@
 
 class FivecentsCDNFilter
 {
-  var $baseUrl = null;
-  var $cdnUrl = null;
-  var $excludedPhrases = null;
-  var $directories = null;
-  var $disableForAdmin = null;
+  public $baseUrl = null;
+  public $cdnUrl = null;
+  public $excludedPhrases = null;
+  public $directories = null;
+  public $disableForAdmin = null;
 
   function __construct($baseUrl, $cdnUrl, $directories, $excludedPhrases, $disableForAdmin) 
   {
@@ -16,6 +16,7 @@ class FivecentsCDNFilter
 		$this->disableForAdmin = $disableForAdmin;
 
 		// Prepare the excludes
+		$this->excludedPhrases = [];
 		if(trim($excludedPhrases) != '')
 		{
 			$this->excludedPhrases = explode(',', $excludedPhrases);
@@ -59,10 +60,40 @@ class FivecentsCDNFilter
 	  return $this->cdnUrl . $foundUrl;
   }
 
-	protected function rewrite($html) 
+	protected function rewrite($html)
 	{
 		$directoriesRegex = implode('|', $this->directories);
 		$regex = '#(?<=[(\"\'])(?:'. quotemeta($this->baseUrl) .')?/(?:((?:'.$directoriesRegex.')[^\"\')]+)|([^/\"\']+\.[^/\"\')]+))(?=[\"\')])#';
+
+		// debug output, add one line to your wp-config.php defined('FIVECENTSCDN_DEBUG', true)
+		if ( defined('FIVECENTSCDN_DEBUG') && FIVECENTSCDN_DEBUG ) {
+			$log = [];
+			$result = preg_replace_callback($regex, function($asset) use (&$log) {
+				$original  = $asset[0];
+				$rewritten = $this->rewriteUrl($asset);
+				if ( $rewritten === $original ) {
+					$log[] = "SKIPPED  : $original";
+				} else {
+					$log[] = "REWRITTEN: $original\n             => $rewritten";
+				}
+				return $rewritten;
+			}, $html);
+
+			$comment  = "\n<!-- [5centsCDN DEBUG]\n";
+			$comment .= "  baseUrl  : {$this->baseUrl}\n";
+			$comment .= "  cdnUrl   : {$this->cdnUrl}\n";
+			$comment .= "  dirs     : " . implode(', ', $this->directories) . "\n";
+			$comment .= "  excludes : " . implode(', ', $this->excludedPhrases) . "\n";
+			$comment .= "  regex    : $regex\n";
+			$comment .= "  matches  : " . count($log) . "\n";
+			foreach ( $log as $entry ) {
+				$comment .= "    $entry\n";
+			}
+			$comment .= "-->\n";
+
+			return $comment . $result;
+		}
+
 		return preg_replace_callback($regex, array(&$this, "rewriteUrl"), $html);
 	}
 	

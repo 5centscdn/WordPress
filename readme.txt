@@ -2,9 +2,9 @@
 Contributors: 5centsCDN
 Tags: optimize, cdn, content delivery network, performance, caching
 Requires at least: 3.8
-Tested up to: 6.8
+Tested up to: 7.0
 Stable tag: trunk
-Version: 25.4.15
+Version: 26.06.09
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -54,6 +54,16 @@ Once you have your API key, go back to your WordPress site, paste the API key, a
 A: Asset Acceleration delivers specific content types like images (JPEG, PNG, AVIF), documents (PDF), and similar files using the CDN. Whole Site Acceleration, on the other hand, delivers the entire website including HTML, CSS, JS, fonts, and more. For optimal performance, we recommend using Whole Site Acceleration.
 
 == Changelog ==
+
+= 26.06.09 =
+* Plugin Supports WordPress Version 7.0
+* Added built-in debug mode for URL rewrite tracing
+* Fixed PHP 8 compatibility: array_push on null excludedPhrases
+* Fixed PHP 8 compatibility: count() on undefined variable in zone list
+* Fixed str_replace("http") mangling paths containing "http" substrings
+* Improved error messages for better clarity and debugging
+* Fixed issues with enabling and disabling the CDN
+* Fixed zone list loading and display issues
 
 = 25.4.15 =
 * Plugin Supports WordPress Version 6.8
@@ -129,6 +139,16 @@ A: Asset Acceleration delivers specific content types like images (JPEG, PNG, AV
 6. Cache Purging: Purge All / Selected files / Post / Page
 
 == Release Notes ==
+
+= 26.06.09 (JUNE 09TH, 2026) =
+* Plugin Supports WordPress Version 7.0
+* Added built-in debug mode for URL rewrite tracing (define FIVECENTSCDN_DEBUG to enable)
+* Fixed PHP 8 compatibility: array_push on null excludedPhrases
+* Fixed PHP 8 compatibility: count() on undefined variable in zone list
+* Fixed str_replace("http") mangling paths containing "http" substrings
+* Improved error messages for better clarity and debugging
+* Fixed issues with enabling and disabling the CDN
+* Fixed zone list loading and display issues
 
 = 25.4.15 (APRIL 15TH, 2025) =
 * Plugin Supports WordPress Version 6.8

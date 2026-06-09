@@ -1,19 +1,23 @@
 <?php
+
 use GuzzleHttp\Client;
 
 class FivecentsCDNApi
 {
-  public function __construct() 
+  public Client $client;
+  public string $api_uri;
+
+  public function __construct()
   {
-	  $this->client = new Client([
+    $this->client = new Client([
       'http_errors' => false
     ]);
-	  $this->api_uri="https://api.5centscdn.com/v2/";
+    $this->api_uri = "https://api.5centscdn.com/v2/";
   }
 
-  public function listPullZones( $api_key )
+  public function listPullZones($api_key)
   {
-    $res = $this->client->request('GET', $this->api_uri.'zones/http/pull', [
+    $res = $this->client->request('GET', $this->api_uri . 'zones/http/pull?page=0', [
       'headers' => [
         'Accept'        => 'application/json',
         'x-api-key'     =>  $api_key
@@ -22,9 +26,9 @@ class FivecentsCDNApi
     return json_decode($res->getBody(), true);
   }
 
-  public function getPullZones( $id , $api_key )
+  public function getPullZones($id, $api_key)
   {
-    $res = $this->client->request('GET', $this->api_uri.'zones/http/pull/'.$id, [
+    $res = $this->client->request('GET', $this->api_uri . 'zones/http/pull/' . $id, [
       'headers' => [
         'Accept'        => 'application/json',
         'x-api-key'     =>  $api_key
@@ -33,49 +37,48 @@ class FivecentsCDNApi
     return json_decode($res->getBody(), true);
   }
 
-
-   public function updatePullZoneSsl($zoneid,$api_key,$http2,$redirect,$mode,$enabled)
+  public function updatePullZoneSsl($zoneid, $api_key, $http2, $redirect, $mode, $enabled)
   {
-    	$res = $this->client->request('POST', $this->api_uri.'zones/http/pull/'.$zoneid.'/ssl', [
+    $res = $this->client->request('POST', $this->api_uri . 'zones/http/pull/' . $zoneid . '/ssl', [
       'form_params' => [
         'http2' => $http2,
-        'enabled'=>$enabled,
-        'mode'=>$mode,
-        'redirect'=>$redirect
-        
-      ],'headers' => [
+        'enabled' => $enabled,
+        'mode' => $mode,
+        'redirect' => $redirect
+
+      ],
+      'headers' => [
         'Accept'        => 'application/json',
         'x-api-key'     =>  $api_key
       ]
     ]);
     return json_decode($res->getBody(), true);
-  
   }
 
-    public function updatePullZoneCname($zoneid,$api_key,$orgin,$cnames)
+  public function updatePullZoneCname($zoneid, $api_key, $orgin, $cnames)
   {
-    	$res = $this->client->request('POST', $this->api_uri.'zones/http/pull/'.$zoneid, [
-        'form_params' => [
+    $res = $this->client->request('POST', $this->api_uri . 'zones/http/pull/' . $zoneid, [
+      'form_params' => [
 
-          'origin' => $orgin,
-          'optimize'=>'http',
-          'cnames'=>$cnames,
-       
-      ],'headers' => [
+        'origin' => $orgin,
+        'optimize' => 'http',
+        'cnames' => $cnames,
+
+      ],
+      'headers' => [
         'Accept'        => 'application/json',
         'x-api-key'     =>  $api_key
       ]
     ]);
     return json_decode($res->getBody(), true);
-  
   }
 
-  public function purgePullZone($id,$api_key)
+  public function purgePullZone($id, $api_key)
   {
-  	$res = $this->client->request('POST', $this->api_uri.'zones/http/pull/'.$id.'/purge', [
+    $res = $this->client->request('POST', $this->api_uri . 'zones/http/pull/' . $id . '/purge', [
       'form_params' => [
         '_METHOD' => 'DELETE'
-      ], 
+      ],
       'headers' => [
         'Accept'        => 'application/json',
         'x-api-key'     =>  $api_key
@@ -84,14 +87,13 @@ class FivecentsCDNApi
     return json_decode($res->getBody(), true);
   }
 
-
-  public function purgePullZoneFile($id,$api_key,$files)
+  public function purgePullZoneFile($id, $api_key, $files)
   {
-  	$res = $this->client->request('POST', $this->api_uri.'zones/http/pull/'.$id.'/purge', [
+    $res = $this->client->request('POST', $this->api_uri . 'zones/http/pull/' . $id . '/purge', [
       'form_params' => [
         '_METHOD' => 'DELETE',
-        'files'=>$files
-      ], 
+        'files' => $files
+      ],
       'headers' => [
         'Accept'        => 'application/json',
         'x-api-key'     =>  $api_key
@@ -99,13 +101,14 @@ class FivecentsCDNApi
     ]);
     return json_decode($res->getBody(), true);
   }
-  
-  public function httpPullZone($id, $api_key,$http)
+
+  public function httpPullZone($id, $api_key, $http)
   {
-  	$res = $this->client->request('POST', $this->api_uri.'zones/http/pull/'.$id.'/ssl', [
+    $res = $this->client->request('POST', $this->api_uri . 'zones/http/pull/' . $id . '/ssl', [
       'form_params' => [
         'http2' => $http,
-      ],'headers' => [
+      ],
+      'headers' => [
         'Accept'        => 'application/json',
         'x-api-key'     =>  $api_key
       ]

@@ -24,6 +24,16 @@ The plugin will automatically configure your website to replace existing static 
 * WordPress >=3.8
 
 #### Release Notes
+**26.06.09 (JUNE 09TH, 2026)**
+ - Plugin Supports WordPress Version 7.0
+ - Added built-in debug mode for URL rewrite tracing (define FIVECENTSCDN_DEBUG to enable)
+ - Fixed PHP 8 compatibility: array_push on null excludedPhrases
+ - Fixed PHP 8 compatibility: count() on undefined variable in zone list
+ - Fixed str_replace("http") mangling paths containing "http" substrings
+ - Improved error messages for better clarity and debugging
+ - Fixed issues with enabling and disabling the CDN
+ - Fixed zone list loading and display issues
+
 **25.4.15 (APRIL 15TH, 2025)**
  - Plugin Supports WordPress Version 6.8
 

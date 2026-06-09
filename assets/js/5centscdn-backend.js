@@ -1,12 +1,10 @@
 function tab_event(tab) {
   if (tab === 'tab_1') {
-
     jQuery('.tab-1-section').show();
     jQuery('.tab-2-section').hide();
     jQuery('#tab_1').attr('class', 'fivecent-nav-tabs-active');
     jQuery('#tab_2').attr('class', 'fivecent-nav-tabs-inactive');
   } else {
-
     jQuery('.tab-2-section').show();
     jQuery('.tab-1-section').hide();
     jQuery('#tab_1').attr('class', 'fivecent-nav-tabs-inactive');
@@ -37,7 +35,6 @@ function acceleration(data) {
     jQuery('.http2_section').css('opacity', 1);
     jQuery("#http2").prop('disabled', false);
 
-
     jQuery('.https_section').css('pointer-events', 'unset');
     jQuery('.https_section').css('opacity', 1);
     jQuery("#https").prop('disabled', false);
@@ -50,8 +47,6 @@ function acceleration(data) {
     var cdn_backup_value = jQuery('#wp_disble_cdn_backup').val();
 
     jQuery('#wp_disble_cdn').val(cdn_backup_value);
-
-
     jQuery('#tab_2').prop('pointer-events', 'unset');
     jQuery('#tab_2').prop('opacity', 1);
 
@@ -62,7 +57,6 @@ function acceleration(data) {
     jQuery('.http2_section').css('pointer-events', 'none');
     jQuery('.http2_section').css('opacity', 0.4);
     jQuery("#http2").prop('disabled', true);
-
 
     jQuery('.https_section').css('pointer-events', 'none');
     jQuery('.https_section').css('opacity', 0.4);
@@ -75,7 +69,6 @@ function acceleration(data) {
 
     jQuery('#wp_disble_cdn').val(0);
 
-
     jQuery('#tab_2').css('pointer-events', 'none');
     jQuery('#tab_2').css('opacity', 0.4);
 
@@ -85,7 +78,6 @@ function acceleration(data) {
 /* end section */
 
 /* auto service id change */
-
 var existingapikey = jQuery("#fivecentscdn_api_key").val();
 if (jQuery.trim(existingapikey)) {
 
@@ -98,17 +90,12 @@ if (jQuery.trim(existingapikey)) {
       apikey: existingapikey
     },
     success: function (res) {
-
-
       if (res.length !== 0) {
-
-        var zoneurl = 'https://cp.5centscdn.net/dashboard/' + res[0]['serviceid'] + '/zones/http/pull/new';
+        var zoneurl = 'https://www.5centscdn.net/dashboard/' + res[0]['serviceid'] + '/zones/http/pull';
 
         jQuery("#serviceid").val(res[0]['serviceid']);
         jQuery('.zoneurl_website_url').attr('href', zoneurl);
       }
-
-
     }
 
   });
@@ -153,7 +140,6 @@ if (jQuery.trim(existingapikey)) {
       success: function (res) {
 
         if (res.warning !== false) {
-
           let result = res.warning.replace('/dashboard/', "https://cp.5centscdn.net/dashboard/");
           result = result.replace('<a', "<a target='_blank' style='color:#59A52C;'");
 
@@ -164,11 +150,8 @@ if (jQuery.trim(existingapikey)) {
         if (res.warning == false) {
           jQuery('#temp_ssl_warning_holder').val(0);
         } else {
-
           jQuery('#temp_ssl_warning_holder').val(res.warning);
         }
-
-
       }
     });
 
@@ -196,35 +179,26 @@ function field_pusher() {
 }
 
 function remove_field(id) {
-
   jQuery("#field_" + id).remove();
 }
 
-
 /* pure particular post or page */
-
 function purgecacheFile() {
 
   var pageurlFiles = [];
 
-
   var inputs = jQuery("#page_url_pusher :input").each(function (e) {
-    id = this.id;
-
+    var id = this.id;
     var page = jQuery.trim(this.value);
 
     if (page) {
-
       pageurlFiles.push(page);
       jQuery('.pusher_field_alert_' + id).hide();
-
     } else {
-
       jQuery('.pusher_field_alert_' + id).show();
-
     }
-
   });
+
   if (jQuery("#page_url_pusher :input").length === pageurlFiles.length) {
     fivecentscdn_showPopupMessage("Clearing Cache ...");
 
@@ -244,12 +218,10 @@ function purgecacheFile() {
           }, 300);
         } else {
           fivecentscdn_hidePopupMessage();
-
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Clearing cache failed. Please check your API key.',
-
+            text: res.message || 'Clearing cache failed. Please check your API key.',
           })
         }
       }
@@ -364,8 +336,7 @@ function purgecache() {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Clearing cache failed. Please check your API key.',
-
+          text: res.message || 'Clearing cache failed. Please check your API key.',
         })
       }
 
@@ -499,7 +470,6 @@ function update_zone_ssl(data) {
         jQuery('.ssl-update-error-error').show();
         jQuery('.ssl-update-error-error').html('<p class="error-text"  >' + result + '</p>');
 
-
       } else {
 
         jQuery('.ssl-update-error-error').hide();
@@ -521,13 +491,11 @@ function update_zone_ssl(data) {
         jQuery('.https_redirect_section').css('opacity', 1);
         jQuery("#redirect").prop('disabled', false);
 
-
       } else if (res.zone.ssl.enabled == "N") {
 
         jQuery('.http2_section').css('pointer-events', 'none');
         jQuery('.http2_section').css('opacity', 0.4);
         jQuery("#http2").prop('disabled', true);
-
 
         jQuery('.https_redirect_section').css('pointer-events', 'none');
         jQuery('.https_redirect_section').css('opacity', 0.4);
@@ -605,18 +573,11 @@ function submitForm() {
         jQuery('#cname_add_field').focus();
 
         return false;
-
       }
-
-
     }
-
   }
 
-
   jQuery('#fivecentscdn_options_form').submit();
-
-
 }
 
 
@@ -666,13 +627,10 @@ jQuery('#cname_add_button').click(function (event) {
               jQuery('.cname_added_warning_messages').html('');
 
               for (i = 0; i < res.warnings.length; i++) {
-
                 jQuery(".cname_added_warning_messages").append('<p class="error-text" style="line-height:5px!important; ">' + res.warnings[i] + ' </p> ');
               }
 
               jQuery('.cname_added_warning_messages').css('display', 'block')
-
-
             }
           }
         });
@@ -740,18 +698,11 @@ function setzone() {
         if (json_obj[i].status !== 'Deleted') {
           output.push('<option value="' + json_obj[i].id + '">' + json_obj[i].name + '</option>');
         }
-
       }
       jQuery('#fivecentscdn_pull_zone').html(output.join(''));
     }
   });
 }
-/* jQuery(".class_fivecentscdn_api_key").keyup(function (e) {
-
-
-
-
-}); */
 
 jQuery(".class_fivecentscdn_api_key").on("change paste keyup", function () {
   var api_key = jQuery(".class_fivecentscdn_api_key").val();
@@ -759,6 +710,7 @@ jQuery(".class_fivecentscdn_api_key").on("change paste keyup", function () {
   jQuery(".tab-1-section-1").show();
 
   jQuery(".tab-1-section-2").hide();
+  jQuery(".tab-1-section-2 .warning-message-box").hide()
   jQuery(".fivecent-button-main").show();
   jQuery(".fivecentscdn_api_key_initial").val(api_key);
   jQuery('.fivecent_save_settings_button').hide();
@@ -770,10 +722,7 @@ jQuery("#cdn_status_change").change(function (event) {
 
   if (jQuery('#cdn_status_change').is(':checked')) {
 
-
     var https_status = false;
-
-
     var asset_acceleration_value = jQuery("#asset_acceleration").val();
 
     if (asset_acceleration_value != 1) {
@@ -794,7 +743,6 @@ jQuery("#cdn_status_change").change(function (event) {
         }
       }
 
-
       if (window.location.protocol != "http:" && https_status == false) {
         jQuery('#cdn_status_change').prop('checked', false)
 
@@ -802,16 +750,12 @@ jQuery("#cdn_status_change").change(function (event) {
           icon: 'error',
           title: 'Oops...',
           text: 'turn on https',
-
         })
+
         return false;
       }
-
     }
-
-
   }
-
 
   event.preventDefault();
   var site_url = jQuery('.class_fivecentscdn_site_url').val();
@@ -826,7 +770,6 @@ jQuery("#cdn_status_change").change(function (event) {
     cdn_status_checked = false;
   }
 
-
   if (cdn_status == 1) {
 
     var asset_acceleration_value = jQuery("#asset_acceleration").val();
@@ -839,22 +782,16 @@ jQuery("#cdn_status_change").change(function (event) {
       if (cdn_domain_name_is.includes('5centscdn') == false) {
 
         if (cdn_domain_name_is.includes(window.location.hostname) == false) {
-
           jQuery('.cname_add_warning_message').css('display', 'block');
           jQuery('#cname_add_field').focus();
           jQuery('#cdn_status_change').prop("checked", false)
 
           return false;
-
         }
-
-
       }
-
     }
 
     if (!jQuery.trim(site_url)) {
-
       jQuery('#cdn_status_change').prop("checked", cdn_status_checked)
       jQuery('.class_fivecentscdn_site_url').focus();
       jQuery('.error_notification_web_site_url').show();
@@ -862,6 +799,7 @@ jQuery("#cdn_status_change").change(function (event) {
       jQuery('#cdn_status_change').prop('checked', false)
       return false;
     }
+
     jQuery('.error_notification_web_site_url').hide();
 
     if (!jQuery.trim(api_key)) {
@@ -872,11 +810,10 @@ jQuery("#cdn_status_change").change(function (event) {
       jQuery('#cdn_status_change').prop('checked', false)
       return false;
     }
+
     jQuery('.error_notification_api_key').hide();
 
-
     if (jQuery('#fivecentscdn_pull_zone').val() == '0') {
-
       jQuery('#cdn_status_change').prop("checked", cdn_status_checked)
       jQuery('#fivecentscdn_pull_zone_notice').focus();
       jQuery('.error_notification_pull_zone').show();
@@ -884,10 +821,10 @@ jQuery("#cdn_status_change").change(function (event) {
       jQuery('#cdn_status_change').prop('checked', false)
       return false;
     }
+
     jQuery('.error_notification_pull_zone').hide();
 
     if (jQuery('#fivecentscdn_cdn_domain_name').val() == '0') {
-
       jQuery('#cdn_status_change').prop("checked", cdn_status_checked)
       jQuery('#fivecentscdn_pull_zone_notice').focus();
       jQuery('.error_notification_cdn_domain_name').show();
@@ -895,6 +832,7 @@ jQuery("#cdn_status_change").change(function (event) {
       jQuery('#cdn_status_change').prop('checked', false)
       return false;
     }
+
     jQuery('.error_notification_cdn_domain_name').hide();
   } else {
 
@@ -905,9 +843,7 @@ jQuery("#cdn_status_change").change(function (event) {
     }
   }
 
-
   jQuery('#wp_disble_cdn').val(cdn_status);
-
   jQuery('#fivecentscdn_options_form').submit();
 });
 
@@ -916,13 +852,9 @@ jQuery("#fivecentscdn-connect-button").click(function (e) {
   var apikey = jQuery("#fivecentscdn_api_key").val();
   e.preventDefault();
 
-
   if (apikey.length == 0) {
-
-
     jQuery(".error_notification_api_key").show();
     jQuery(".error_notification_api_key").html('please first set your API key');
-
     jQuery("#fivecentscdn_api_key").focus();
   } else {
     jQuery("#fivecentscdn-connect-button").html('Connecting.. <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
@@ -948,26 +880,20 @@ jQuery("#fivecentscdn-connect-button").click(function (e) {
         jQuery('#https').prop("checked", false);
         jQuery('#redirect').prop("checked", false)
 
-
         if (res.length !== 0) {
-
-          var zoneurl = 'https://cp.5centscdn.net/dashboard/' + res[0]['serviceid'] + '/zones/http/pull/new';
-
+          var zoneurl = 'https://www.5centscdn.net/dashboard/' + res[0]['serviceid'] + '/zones/http/pull';
           jQuery("#serviceid").val(res[0]['serviceid']);
           jQuery('.zoneurl_website_url').attr('href', zoneurl);
         }
 
-
       },
       error: function (xhr, status, error) {
-
         jQuery(".invalid-apikey-error").show();
         jQuery("#fivecentscdn-connect-button").html('Connect');
       }
     });
 
   }
-  // alert(apikey);
 });
 
 jQuery("#fivecentscdn_pull_zone").keydown(function (e) {
@@ -998,9 +924,6 @@ function fivecentscdn_showPopupMessage(message) {
   jQuery("#fivecentscdn_popupBackground").show("fast");
   jQuery("#fivecentscdn_popupBox").show("fast");
   jQuery("#fivecentscdn_popupMessage").text(message);
-  /*  jQuery([document.documentElement, document.body]).animate({
-       scrollTop: 0
-   }, 500); */
 }
 
 function fivecentscdn_hidePopupMessage() {
@@ -1009,10 +932,10 @@ function fivecentscdn_hidePopupMessage() {
 }
 
 jQuery("#fivecentscdn_cdn_domain_name").change(function (event) {
-
   jQuery('.cname_add_warning_message').css('display', 'none')
   jQuery("#txt_cdn_domain_name").text(jQuery("#fivecentscdn_cdn_domain_name").val());
 });
+
 jQuery("#fivecentscdn_pull_zone").change(function (event) {
   var zone_id = jQuery("#fivecentscdn_pull_zone").val();
   var apikey = jQuery("#fivecentscdn_api_key").val();
@@ -1034,7 +957,7 @@ jQuery("#fivecentscdn_pull_zone").change(function (event) {
       },
       success: function (response) {
         jQuery('.cname_add_warning_message').css('display', 'none');
-        var zoneurl = 'https://cp.5centscdn.net/dashboard/' + response['serviceid'] + '/zones/http/pull/new';
+        var zoneurl = 'https://www.5centscdn.net/dashboard/' + response['serviceid'] + '/zones/http/pull';
 
         jQuery("#serviceid").val(response['serviceid']);
         jQuery('.zoneurl_website_url').attr('href', zoneurl);
@@ -1090,9 +1013,9 @@ jQuery("#fivecentscdn-promotional-banner-close-button").click(function (e) {
   jQuery('#fivecentscdn-promotional-banner').fadeOut(300, () => {
     jQuery(this).remove();
   });
- const expirationDate = new Date();
- expirationDate.setDate(expirationDate.getDate() + 15);
- document.cookie = 'fivecentscdn_banner_closed='+ encodeURIComponent(1) + '; expires=' + expirationDate.toUTCString() + '; path=/';
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 15);
+  document.cookie = 'fivecentscdn_banner_closed=' + encodeURIComponent(1) + '; expires=' + expirationDate.toUTCString() + '; path=/';
 });
 
 (function () {
