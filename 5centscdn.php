@@ -221,7 +221,6 @@ function fivecentscdn_do_rewrite() {
       $rewriter->startRewrite();
     }
   }
-
 }
 
 function fivecentscdn_update_zone_ssl() {

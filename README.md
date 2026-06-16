@@ -33,6 +33,7 @@ The plugin will automatically configure your website to replace existing static 
  - Improved error messages for better clarity and debugging
  - Fixed issues with enabling and disabling the CDN
  - Fixed zone list loading and display issues
+ - Fixed URL rewrite regex to match both http:// and https:// asset URLs for protocol-agnostic CDN replacement
 
 **25.4.15 (APRIL 15TH, 2025)**
  - Plugin Supports WordPress Version 6.8

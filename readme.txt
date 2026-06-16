@@ -64,6 +64,7 @@ A: Asset Acceleration delivers specific content types like images (JPEG, PNG, AV
 * Improved error messages for better clarity and debugging
 * Fixed issues with enabling and disabling the CDN
 * Fixed zone list loading and display issues
+* Fixed URL rewrite regex to match both http:// and https:// asset URLs for protocol-agnostic CDN replacement
 
 = 25.4.15 =
 * Plugin Supports WordPress Version 6.8
@@ -149,6 +150,7 @@ A: Asset Acceleration delivers specific content types like images (JPEG, PNG, AV
 * Improved error messages for better clarity and debugging
 * Fixed issues with enabling and disabling the CDN
 * Fixed zone list loading and display issues
+* Fixed URL rewrite regex to match both http:// and https:// asset URLs for protocol-agnostic CDN replacement
 
 = 25.4.15 (APRIL 15TH, 2025) =
 * Plugin Supports WordPress Version 6.8
